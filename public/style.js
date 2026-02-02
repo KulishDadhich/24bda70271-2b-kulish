@@ -1,54 +1,49 @@
-// Product data (like app/page.tsx)
-const products = [
-  { id: 1, name: "Laptop", price: 999.99, category: "electronics" },
-  { id: 2, name: "Headphones", price: 199.99, category: "electronics" },
-  { id: 3, name: "T-Shirt", price: 29.99, category: "clothing" },
-  { id: 4, name: "Jeans", price: 59.99, category: "clothing" },
-];
+const productList = document.getElementById("product-list");
+const filter = document.getElementById("filter");
 
-const categorySelect = document.getElementById("categorySelect");
-const sortSelect = document.getElementById("sortSelect");
-const productGrid = document.getElementById("productGrid");
+let products = [];
 
-function renderProducts(list) {
-  productGrid.innerHTML = "";
+// Fetch products from server
+async function loadProducts() {
+  const res = await fetch("/api/products");
+  products = await res.json();
+  displayProducts(products);
+}
 
-  list.forEach(product => {
+// Display Products
+function displayProducts(data) {
+  productList.innerHTML = "";
+
+  data.forEach(product => {
     const card = document.createElement("div");
-    card.className = "bg-white border rounded-xl p-5";
+    card.classList.add("card");
 
     card.innerHTML = `
-      <h2 class="text-2xl font-bold">${product.name}</h2>
-      <p class="text-lg mt-2">$${product.price.toFixed(2)}</p>
-      <span class="inline-block mt-3 px-3 py-1 text-sm rounded-full
-        ${product.category === "electronics" ? "bg-blue-200" : "bg-green-200"}">
+      <h3>${product.name}</h3>
+      <div class="price">$${product.price}</div>
+      <span class="tag ${product.category}">
         ${product.category}
       </span>
     `;
 
-    productGrid.appendChild(card);
+    productList.appendChild(card);
   });
 }
 
-function updateProducts() {
-  let updated = [...products];
+// Filter Logic
+filter.addEventListener("change", () => {
+  const value = filter.value;
 
-  if (categorySelect.value !== "all") {
-    updated = updated.filter(
-      p => p.category === categorySelect.value
+  if (value === "all") {
+    displayProducts(products);
+  } else {
+    const filtered = products.filter(
+      p => p.category === value
     );
+
+    displayProducts(filtered);
   }
+});
 
-  if (sortSelect.value === "low-high") {
-    updated.sort((a, b) => a.price - b.price);
-  } else if (sortSelect.value === "high-low") {
-    updated.sort((a, b) => b.price - a.price);
-  }
-
-  renderProducts(updated);
-}
-
-categorySelect.addEventListener("change", updateProducts);
-sortSelect.addEventListener("change", updateProducts);
-
-renderProducts(products);
+// Init
+loadProducts();

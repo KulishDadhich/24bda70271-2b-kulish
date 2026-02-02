@@ -1,33 +1,40 @@
-const http = require("http");
-const fs = require("fs");
-const path = require("path");
-
+const express = require("express");
+const app = express();
 const PORT = 3000;
 
-const server = http.createServer((req, res) => {
-  let filePath = path.join(
-    __dirname,
-    "public",
-    req.url === "/" ? "index.html" : req.url
-  );
+app.use(express.static("public"));
 
-  const ext = path.extname(filePath);
-  let contentType = "text/html";
+const products = [
+  {
+    id: 1,
+    name: "Wireless Headphones",
+    price: 129.99,
+    category: "electronics"
+  },
+  {
+    id: 2,
+    name: "Cotton T-Shirt",
+    price: 24.99,
+    category: "clothing"
+  },
+  {
+    id: 3,
+    name: "Bluetooth Speaker",
+    price: 89.99,
+    category: "electronics"
+  },
+  {
+    id: 4,
+    name: "Denim Jeans",
+    price: 59.99,
+    category: "clothing"
+  }
+];
 
-  if (ext === ".css") contentType = "text/css";
-  if (ext === ".js") contentType = "text/javascript";
-
-  fs.readFile(filePath, (err, content) => {
-    if (err) {
-      res.writeHead(404);
-      res.end("404 - File Not Found");
-    } else {
-      res.writeHead(200, { "Content-Type": contentType });
-      res.end(content);
-    }
-  });
+app.get("/api/products", (req, res) => {
+  res.json(products);
 });
 
-server.listen(PORT, () => {
+app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
 });
