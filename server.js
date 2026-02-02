@@ -1,38 +1,13 @@
 const express = require("express");
+const path = require("path");
+
 const app = express();
 const PORT = 3000;
 
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname)));
 
-const products = [
-  {
-    id: 1,
-    name: "Wireless Headphones",
-    price: 129.99,
-    category: "electronics"
-  },
-  {
-    id: 2,
-    name: "Cotton T-Shirt",
-    price: 24.99,
-    category: "clothing"
-  },
-  {
-    id: 3,
-    name: "Bluetooth Speaker",
-    price: 89.99,
-    category: "electronics"
-  },
-  {
-    id: 4,
-    name: "Denim Jeans",
-    price: 59.99,
-    category: "clothing"
-  }
-];
-
-app.get("/api/products", (req, res) => {
-  res.json(products);
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.html"));
 });
 
 app.listen(PORT, () => {

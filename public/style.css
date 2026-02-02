@@ -2,89 +2,85 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
+  font-family: "Segoe UI", sans-serif;
 }
 
 body {
-  background: #f9fafb;
+  background: #ffffff;
+  padding: 40px;
 }
 
 .container {
   max-width: 900px;
-  margin: 40px auto;
-  padding: 20px;
+  margin: auto;
 }
 
 h1 {
-  font-size: 36px;
-  margin-bottom: 20px;
-}
-
-.filter-box {
-  display: flex;
-  align-items: center;
-  gap: 15px;
+  font-size: 42px;
+  font-weight: 800;
   margin-bottom: 30px;
 }
 
-.filter-box label {
+.filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 40px;
+}
+
+.filter-bar label {
   font-size: 18px;
-  font-weight: bold;
 }
 
 select {
-  padding: 10px 15px;
+  padding: 14px 18px;
+  width: 320px;
   font-size: 16px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  cursor: pointer;
+  border-radius: 10px;
+  border: 2px solid #e0e6ef;
+  outline: none;
 }
 
 .products {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 25px;
+  gap: 30px;
 }
-
-/* Product Card */
 
 .card {
+  border: 2px solid #e8edf4;
+  border-radius: 16px;
+  padding: 28px;
   background: #fff;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  transition: 0.3s ease;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.04);
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-.card:hover {
-  transform: translateY(-5px);
-}
-
-.card h3 {
-  font-size: 22px;
+.card h2 {
+  font-size: 28px;
   margin-bottom: 10px;
 }
 
 .price {
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 15px;
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 20px;
 }
 
 .tag {
   display: inline-block;
-  padding: 6px 14px;
-  border-radius: 20px;
+  padding: 8px 18px;
+  border-radius: 999px;
   font-size: 14px;
-  color: white;
+  color: #fff;
+  text-transform: lowercase;
 }
 
-/* Category Colors */
-
 .electronics {
-  background: #2563eb;
+  background: #3b6df6;
 }
 
 .clothing {
-  background: #60a5fa;
+  background: #9fc3ff;
+  color: #ffffff;
 }

@@ -1,49 +1,38 @@
-const productList = document.getElementById("product-list");
-const filter = document.getElementById("filter");
+const products = [
+  { name: "Wireless Headphones", price: 129.99, category: "electronics" },
+  { name: "Cotton T-Shirt", price: 24.99, category: "clothing" },
+  { name: "Bluetooth Speaker", price: 89.99, category: "electronics" },
+  { name: "Denim Jeans", price: 59.99, category: "clothing" }
+];
 
-let products = [];
+const productList = document.getElementById("productList");
+const filter = document.getElementById("categoryFilter");
 
-// Fetch products from server
-async function loadProducts() {
-  const res = await fetch("/api/products");
-  products = await res.json();
-  displayProducts(products);
-}
-
-// Display Products
-function displayProducts(data) {
+function displayProducts(items) {
   productList.innerHTML = "";
 
-  data.forEach(product => {
+  items.forEach(p => {
     const card = document.createElement("div");
-    card.classList.add("card");
+    card.className = "card";
 
     card.innerHTML = `
-      <h3>${product.name}</h3>
-      <div class="price">$${product.price}</div>
-      <span class="tag ${product.category}">
-        ${product.category}
-      </span>
+      <h2>${p.name}</h2>
+      <div class="price">$${p.price}</div>
+      <span class="tag ${p.category}">${p.category}</span>
     `;
 
     productList.appendChild(card);
   });
 }
 
-// Filter Logic
 filter.addEventListener("change", () => {
   const value = filter.value;
 
   if (value === "all") {
     displayProducts(products);
   } else {
-    const filtered = products.filter(
-      p => p.category === value
-    );
-
-    displayProducts(filtered);
+    displayProducts(products.filter(p => p.category === value));
   }
 });
 
-// Init
-loadProducts();
+displayProducts(products);
