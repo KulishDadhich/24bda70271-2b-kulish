@@ -1,28 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Product Filter</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>Product Store</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div class="container">
-    <h1>Product Filter</h1>
+<div class="container">
 
-    <div class="filter-bar">
-      <label>Filter by:</label>
-      <select id="categoryFilter">
+  <h1>Product Store</h1>
+
+  <div class="controls">
+
+    <div>
+      <label>Category:</label>
+      <select id="category">
         <option value="all">All Products</option>
         <option value="electronics">Electronics</option>
         <option value="clothing">Clothing</option>
       </select>
     </div>
 
-    <div class="products" id="productList"></div>
+    <div>
+      <label>Sort:</label>
+      <select id="sort">
+        <option value="default">Default</option>
+        <option value="low">Price: Low to High</option>
+        <option value="high">Price: High to Low</option>
+      </select>
+    </div>
+
   </div>
 
-  <script src="style.js"></script>
+  <div id="product-list" class="products"></div>
+
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>

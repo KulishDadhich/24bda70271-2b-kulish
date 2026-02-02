@@ -1,38 +1,81 @@
 const products = [
-  { name: "Wireless Headphones", price: 129.99, category: "electronics" },
-  { name: "Cotton T-Shirt", price: 24.99, category: "clothing" },
-  { name: "Bluetooth Speaker", price: 89.99, category: "electronics" },
-  { name: "Denim Jeans", price: 59.99, category: "clothing" }
+  {
+    name: "Wireless Headphones",
+    price: 129.99,
+    category: "electronics"
+  },
+  {
+    name: "Cotton T-Shirt",
+    price: 24.99,
+    category: "clothing"
+  },
+  {
+    name: "Bluetooth Speaker",
+    price: 89.99,
+    category: "electronics"
+  },
+  {
+    name: "Denim Jeans",
+    price: 59.99,
+    category: "clothing"
+  }
 ];
 
-const productList = document.getElementById("productList");
-const filter = document.getElementById("categoryFilter");
+const productList = document.getElementById("product-list");
+const categoryFilter = document.getElementById("category");
+const sortFilter = document.getElementById("sort");
 
-function displayProducts(items) {
+// Display Products
+function showProducts(data) {
+
   productList.innerHTML = "";
 
-  items.forEach(p => {
+  data.forEach(p => {
+
     const card = document.createElement("div");
     card.className = "card";
 
     card.innerHTML = `
-      <h2>${p.name}</h2>
+      <h3>${p.name}</h3>
       <div class="price">$${p.price}</div>
-      <span class="tag ${p.category}">${p.category}</span>
+      <span class="tag ${p.category}">
+        ${p.category}
+      </span>
     `;
 
     productList.appendChild(card);
   });
 }
 
-filter.addEventListener("change", () => {
-  const value = filter.value;
+// Filter + Sort
+function updateProducts() {
 
-  if (value === "all") {
-    displayProducts(products);
-  } else {
-    displayProducts(products.filter(p => p.category === value));
+  let filtered = [...products];
+
+  // Category Filter
+  const category = categoryFilter.value;
+
+  if (category !== "all") {
+    filtered = filtered.filter(p => p.category === category);
   }
-});
 
-displayProducts(products);
+  // Sort
+  const sort = sortFilter.value;
+
+  if (sort === "low") {
+    filtered.sort((a, b) => a.price - b.price);
+  }
+
+  if (sort === "high") {
+    filtered.sort((a, b) => b.price - a.price);
+  }
+
+  showProducts(filtered);
+}
+
+// Events
+categoryFilter.addEventListener("change", updateProducts);
+sortFilter.addEventListener("change", updateProducts);
+
+// Initial Load
+showProducts(products);

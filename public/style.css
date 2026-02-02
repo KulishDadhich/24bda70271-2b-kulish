@@ -2,85 +2,100 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Segoe UI", sans-serif;
+  font-family: Arial, sans-serif;
 }
 
 body {
-  background: #ffffff;
-  padding: 40px;
+  background: #f3f4f6;
 }
 
 .container {
-  max-width: 900px;
-  margin: auto;
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 20px;
+  text-align: center;
 }
 
 h1 {
-  font-size: 42px;
-  font-weight: 800;
-  margin-bottom: 30px;
+  font-size: 36px;
+  margin-bottom: 25px;
 }
 
-.filter-bar {
+/* Controls */
+
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.controls div {
   display: flex;
   align-items: center;
-  gap: 15px;
-  margin-bottom: 40px;
+  gap: 10px;
 }
 
-.filter-bar label {
-  font-size: 18px;
+label {
+  font-weight: bold;
 }
 
 select {
-  padding: 14px 18px;
-  width: 320px;
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
   font-size: 16px;
-  border-radius: 10px;
-  border: 2px solid #e0e6ef;
-  outline: none;
 }
+
+/* Products Grid */
 
 .products {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 30px;
+  gap: 25px;
 }
+
+/* Card */
 
 .card {
-  border: 2px solid #e8edf4;
-  border-radius: 16px;
-  padding: 28px;
-  background: #fff;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.04);
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  text-align: left;
+  transition: 0.3s;
 }
 
-.card h2 {
-  font-size: 28px;
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card h3 {
+  font-size: 22px;
   margin-bottom: 10px;
 }
 
 .price {
-  font-size: 26px;
-  font-weight: 700;
-  margin-bottom: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 12px;
 }
 
 .tag {
   display: inline-block;
-  padding: 8px 18px;
-  border-radius: 999px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  color: white;
   font-size: 14px;
-  color: #fff;
-  text-transform: lowercase;
 }
 
+/* Category Colors */
+
 .electronics {
-  background: #3b6df6;
+  background: #2563eb;
 }
 
 .clothing {
-  background: #9fc3ff;
-  color: #ffffff;
+  background: #60a5fa;
 }
